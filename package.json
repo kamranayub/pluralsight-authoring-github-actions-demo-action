@@ -1,0 +1,12 @@
+{
+  "name": "pluralsight-authoring-github-actions-demo-action",
+  "version": "1.0.0",
+  "description": "Demo Slack Ping + Custom Action",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,39 @@
+name: 'Pluralsight Demo: Custom Slack Action'
+description: 'Pings an organizational contact in Slack using a custom integration'
+inputs:
+  github-token:
+    description: 'The GitHub token to authenticate with GitHub API'
+    required: true
+    default: '${{ secrets.GITHUB_TOKEN }}'
+  github-username:
+    description: 'The GitHub username of the employee to look up'
+    required: true
+    default: '${{ github.actor }}'
+  slack-token:
+    description: 'The organizational Slack access token'
+    required: true
+    default: '${{ secrets.SLACK_TOKEN }}'
+  slack-bot-token:
+    description: 'The Slack bot token to post messages'
+    required: true
+    default: '${{ secrets.SLACK_BOT_TOKEN }}'
+outputs:
+  time:
+    description: 'The time we sent the message'
+runs:
+  using: 'composite'
+  steps:
+
+  - uses: ./get-employee-action
+    id: get_employee
+    with:
+      username: '${{ inputs.github_username }}'
+
+  - name: Post to a Slack user
+    id: slack
+    uses: slackapi/slack-github-action@v1.26.0
+    with:
+      channel-id: '${{ get_employee.outputs.slack-user-id }}'
+      slack-message: "GitHub build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+    env:
+      SLACK_BOT_TOKEN: ${{ inputs.slack-bot-token }}
