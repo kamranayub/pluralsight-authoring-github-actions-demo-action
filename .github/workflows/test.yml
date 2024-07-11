@@ -46,7 +46,7 @@ jobs:
         id: get-employee-output
         run: echo "${{ steps.test-employee-action.outputs.slack-user-id }}"
 
-test-send-message-action:
+  test-send-message-action:
     name: Test Send Slack Action (Composite)
     runs-on: ubuntu-latest
 
