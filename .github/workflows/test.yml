@@ -26,7 +26,7 @@ jobs:
         uses: ./get-employee-action
 
       - name: Print Slack User ID
-        id: output
+        id: get-employee-output
         run: echo "${{ steps.test-employee-action.outputs.slack-user-id }}"
 
       - name: Test Slack Message (Composite) Action
@@ -34,5 +34,5 @@ jobs:
         uses: ./
 
       - name: Print Slack Message Time
-        id: output
+        id: send-message-output
         run: echo "${{ steps.test-send-action.outputs.time }}"
