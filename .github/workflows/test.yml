@@ -25,15 +25,13 @@ jobs:
         id: setup-node
         uses: actions/setup-node@v4
         with:
-          working-directory: get-employee-action
-          node-version-file: .nvmrc
+          node-version-file: get-employee-action/.nvmrc
           cache: npm
 
       - name: Install Dependencies
         id: npm-ci
         run: npm ci
-        with:
-          working-directory: get-employee-action
+        working-directory: get-employee-action
 
       - name: Test Get Employee (JavaScript) Action
         id: test-employee-action
