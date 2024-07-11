@@ -1,5 +1,5 @@
 name: 'Pluralsight Demo: Get Employee Slack Action'
-description: 'Looks up an employee's Slack ID by their GitHub username'
+description: "Looks up an employee's Slack ID by their GitHub username"
 inputs:
   github-token:
     description: 'The GitHub token to authenticate with GitHub API'
