@@ -23,6 +23,9 @@ async function run() {
       return core.setFailed(
         `No public email found for GitHub user: ${githubUsername}`
       );
+    } else {
+      core.info(`Email found for GitHub user`);
+      core.debug(`Email: ${email}`);
     }
 
     // Slack API: get user by email address
@@ -40,7 +43,7 @@ async function run() {
 
     // Get the JSON webhook payload for the event that triggered the workflow
     const payload = JSON.stringify(github.context.payload, undefined, 2);
-    console.log(`The event payload: ${payload}`);
+    core.debug(`The event payload: ${payload}`);
   } catch (error) {
     core.setFailed(error.message);
   }
