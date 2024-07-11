@@ -23,7 +23,7 @@ runs:
   - uses: ./get-employee-action
     id: get-employee
     with:
-      github-username: ${{ inputs.github_username }}
+      github-username: ${{ inputs.github-username }}
       github-token: ${{ inputs.github-token }}
       slack-token: ${{ inputs.slack-token }}
 
