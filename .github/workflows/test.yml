@@ -12,8 +12,8 @@ permissions:
   contents: read
 
 jobs:
-  test-action:
-    name: GitHub Actions Test
+  test-get-employee-action:
+    name: Test Get Employee Action (JavaScript)
     runs-on: ubuntu-latest
 
     steps:
@@ -37,14 +37,45 @@ jobs:
       - name: Test Get Employee (JavaScript) Action
         id: test-employee-action
         uses: ./get-employee-action
+        with:
+          github-username: ${{ github.actor }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          slack-token: ${{ secrets.SLACK_TOKEN }}
 
       - name: Print Slack User ID
         id: get-employee-output
         run: echo "${{ steps.test-employee-action.outputs.slack-user-id }}"
 
+test-send-message-action:
+    name: Test Send Slack Action (Composite)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        id: setup-node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: get-employee-action/.nvmrc
+          cache-dependency-path: get-employee-action
+          cache: npm
+
+      - name: Install Dependencies
+        id: npm-ci
+        run: npm ci
+        working-directory: get-employee-action
+
       - name: Test Slack Message (Composite) Action
         id: test-send-action
         uses: ./
+        with:
+          github-username: ${{ github.actor }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          slack-token: ${{ secrets.SLACK_TOKEN }}
+          slack-bot-token: ${{ secrets.SLACK_BOT_TOKEN }}
 
       - name: Print Slack Message Time
         id: send-message-output
