@@ -1,4 +1,4 @@
-name: 'Pluralsight Demo: Get Employee Slack Action'
+name: 'Pluralsight Demo: Get Employee Slack Action (Docker)'
 description: "Looks up an employee's Slack ID by their GitHub username"
 inputs:
   github-token:
@@ -14,5 +14,5 @@ outputs:
   slack-user-id:
     description: 'The Slack user ID of the employee, if found'
 runs:
-  using: 'node20'
-  main: main.js
+  using: 'docker'
+  image: Dockerfile
