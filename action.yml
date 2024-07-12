@@ -20,7 +20,7 @@ runs:
   using: 'composite'
   steps:
 
-  - uses: ./get-employee-action
+  - uses: ../get-employee-action
     id: get-employee
     with:
       github-username: ${{ inputs.github-username }}
