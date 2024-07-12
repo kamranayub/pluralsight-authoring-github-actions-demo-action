@@ -16,7 +16,3 @@ outputs:
 runs:
   using: 'docker'
   image: Dockerfile
-  args:
-    - ${{ inputs.github-username }}
-    - ${{ inputs.github-token }}
-    - ${{ inputs.slack-token }}
