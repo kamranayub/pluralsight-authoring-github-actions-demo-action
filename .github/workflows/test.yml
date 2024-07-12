@@ -55,6 +55,9 @@ jobs:
         id: checkout
         uses: actions/checkout@v4
 
+      - name: Copy JS action files
+        run: cp -r get-employee-js-action/* get-employee-docker-action/action/
+
       - name: Test Get Employee (Docker) Action
         id: test-employee-action
         uses: ./get-employee-docker-action
