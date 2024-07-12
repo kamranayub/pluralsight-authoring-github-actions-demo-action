@@ -1,0 +1,1 @@
+A placeholder folder to copy the JavaScript action's source files into so that when the Docker action runs, `WORKDIR` can access the files (since the action folder is mounted as the root).
