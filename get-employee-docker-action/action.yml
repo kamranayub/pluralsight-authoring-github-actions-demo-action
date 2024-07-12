@@ -16,6 +16,7 @@ outputs:
 runs:
   using: 'docker'
   image: Dockerfile
+  pre-entrypoint: 'setup.sh'
   args:
     - ${{ inputs.github-username }}
     - ${{ inputs.github-token }}
