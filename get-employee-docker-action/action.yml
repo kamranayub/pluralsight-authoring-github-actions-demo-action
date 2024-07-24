@@ -14,5 +14,5 @@ outputs:
   slack-user-id:
     description: 'The Slack user ID of the employee, if found'
 runs:
-  using: 'docker'
-  image: ../Dockerfile
+  using: docker
+  image: Dockerfile
