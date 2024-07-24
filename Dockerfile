@@ -1,10 +1,16 @@
 FROM node:20-alpine
 
-COPY . ./src
+# Copy the JavaScript action source code into the container
+# The build context is the root of the repository
+COPY ./get-employee-js-action/* ./action
 
-RUN cd src && \
+# Debug the file system layout
+RUN cd action && \
   ls -al
-RUN cd src/get-employee-js-action && \
+
+# Install the dependencies
+RUN cd action && \
   npm ci
 
-ENTRYPOINT ["node", "/src/get-employee-js-action/main.js"]
+# Run the action
+ENTRYPOINT ["node", "/action/main.js"]
