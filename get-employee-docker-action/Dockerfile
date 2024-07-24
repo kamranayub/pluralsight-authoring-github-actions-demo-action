@@ -15,5 +15,8 @@ RUN cd /App && dotnet publish -c Release -o out
 
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
+# For GitHub Actions, you should not use the WORKDIR directive
+# See: https://docs.github.com/en/actions/creating-actions/dockerfile-support-for-github-actions#workdir
+# WORKDIR /App
 COPY --from=build-env /App/out .
 ENTRYPOINT ["dotnet", "/DotNetDockerAction.dll"]
