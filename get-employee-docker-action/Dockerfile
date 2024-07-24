@@ -14,6 +14,6 @@ RUN dotnet restore
 RUN dotnet publish -c Release -o out
 
 # Build runtime image
-FROM mcr.microsoft.com/dotnet/runtime:8.0
-COPY --from=build-env out .
-ENTRYPOINT ["dotnet", "./out/DotNetDockerAction.dll"]
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
+COPY --from=build-env /out .
+ENTRYPOINT ["dotnet", "DotNetDockerAction.dll"]
