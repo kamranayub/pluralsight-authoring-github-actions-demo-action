@@ -15,7 +15,7 @@ try {
 
 async Task<string> LookupSlackUserByGitHubUsername(string githubUsername, string githubToken, string slackToken)
 {
-    var octokit = new GitHubClient(new ProductHeaderValue("PluralsightDemoAction"),);
+    var octokit = new GitHubClient(new ProductHeaderValue("PluralsightDemoAction"));
     var tokenAuth = new Credentials(githubToken);
     octokit.Credentials = tokenAuth;
 
