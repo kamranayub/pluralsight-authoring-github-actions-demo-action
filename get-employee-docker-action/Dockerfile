@@ -8,14 +8,12 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 COPY ./src ./
 
 # Restore as distinct layers
-RUN cd src && \
-    dotnet restore
+RUN dotnet restore
 
 # Build and publish a release
-RUN cd src && \
-    dotnet publish -c Release -o ../out
+RUN dotnet publish -c Release -o out
 
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/runtime:8.0
-COPY --from=build-env /out .
+COPY --from=build-env out .
 ENTRYPOINT ["dotnet", "./out/DotNetDockerAction.dll"]
