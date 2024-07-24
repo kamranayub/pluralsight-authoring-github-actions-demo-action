@@ -4,16 +4,16 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 # See: https://docs.github.com/en/actions/creating-actions/dockerfile-support-for-github-actions#workdir
 # WORKDIR /src
 
-# Copy everything from src to root of the container
-COPY ./src ./
+# Copy everything from src to /App of the container
+COPY ./src /App
 
 # Restore as distinct layers
-RUN dotnet restore
+RUN cd /App && dotnet restore
 
 # Build and publish a release
-RUN dotnet publish -c Release -o out
+RUN cd /App && dotnet publish -c Release -o out
 
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
-COPY --from=build-env /out .
+COPY --from=build-env /App/out .
 ENTRYPOINT ["dotnet", "DotNetDockerAction.dll"]
