@@ -2,9 +2,9 @@ FROM node:20-alpine
 
 COPY . ./src
 
-RUN --mount=type=bind,source=/src \
+RUN cd src && \
   ls -al
-RUN --mount=type=bind,source=/src/get-employee-js-action \
+RUN cd src/get-employee-js-action && \
   npm ci
 
 ENTRYPOINT ["node", "/src/get-employee-js-action/main.js"]
