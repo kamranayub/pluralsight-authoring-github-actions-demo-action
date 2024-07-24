@@ -7,4 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Octokit" Version="13.0.1" />
+    <PackageReference Include="Slack.NetStandard" Version="9.5.0" />
+  </ItemGroup>
+
 </Project>
