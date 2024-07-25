@@ -9,6 +9,8 @@ try
 {
     var slackUserId = await LookupSlackUserByGitHubUsername(githubUsername, githubToken, slackToken);
 
+    Console.WriteLine("Found Slack user ID: " + slackUserId);
+    
     await File.AppendAllLinesAsync(Environment.GetEnvironmentVariable("GITHUB_OUTPUT"), [
         $"slack-user-id={slackUserId}"
     ]);
