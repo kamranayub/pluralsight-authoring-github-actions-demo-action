@@ -1,4 +1,5 @@
-﻿using Octokit;
+﻿using System.Diagnostics;
+using Octokit;
 using Slack.NetStandard;
 
 var githubUsername = Environment.GetEnvironmentVariable("INPUT_GITHUB-USERNAME");
@@ -12,7 +13,7 @@ try
     Console.WriteLine("Found Slack user ID: " + slackUserId);
     
     throw new Exception("Test failure");
-    
+
     await File.AppendAllLinesAsync(Environment.GetEnvironmentVariable("GITHUB_OUTPUT"), [
         $"slack-user-id={slackUserId}"
     ]);
@@ -20,6 +21,7 @@ try
 catch (Exception ex)
 {
     Console.WriteLine($"::error::Failed to lookup Slack ID for GitHub user: {ex.Message}");
+    Environment.Exit(1);
 }
 
 async Task<string> LookupSlackUserByGitHubUsername(string githubUsername, string githubToken, string slackToken)
