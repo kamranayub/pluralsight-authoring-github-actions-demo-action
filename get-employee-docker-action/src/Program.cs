@@ -12,7 +12,7 @@ try
     Console.WriteLine("Found Slack user ID: " + slackUserId);
     
     await File.AppendAllLinesAsync(Environment.GetEnvironmentVariable("GITHUB_OUTPUT"), [
-        $"slack-user-id={slackUserId}"
+        $"slack-user-id={slackUserId}test"
     ]);
 }
 catch (Exception ex)
