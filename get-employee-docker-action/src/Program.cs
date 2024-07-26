@@ -11,6 +11,8 @@ try
 
     Console.WriteLine("Found Slack user ID: " + slackUserId);
     
+    throw new Exception("Test failure");
+    
     await File.AppendAllLinesAsync(Environment.GetEnvironmentVariable("GITHUB_OUTPUT"), [
         $"slack-user-id={slackUserId}"
     ]);
