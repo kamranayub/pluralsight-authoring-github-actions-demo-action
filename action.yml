@@ -38,6 +38,7 @@ runs:
       echo "::error::Slack user IDs do not match from JS and Docker"
       exit 1
     if: steps.get-employee-js.outputs.slack-user-id != steps.get-employee-docker.outputs.slack-user-id
+    shell: sh
 
   - name: Post to a Slack user
     id: slack
