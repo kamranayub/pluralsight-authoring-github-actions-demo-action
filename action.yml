@@ -9,10 +9,10 @@ inputs:
     description: 'The GitHub username of the employee to look up'
     required: true
   slack-token:
-    description: 'The organizational Slack access token'
+    description: 'The organizational Slack access token to look up users'
     required: true
   slack-bot-token:
-    description: 'The Slack bot token to post messages'
+    description: 'The organizational Slack access token to post messages (requires chat:write permissions)'
     required: true
 
 runs:
@@ -33,16 +33,13 @@ runs:
       github-token: ${{ inputs.github-token }}
       slack-token: ${{ inputs.slack-token }}
 
-  - name: Verify Slack user IDs match
-    run: |
+  - run: |
       echo "::error::Slack user IDs do not match from JS and Docker"
       exit 1
     if: steps.get-employee-js.outputs.slack-user-id != steps.get-employee-docker.outputs.slack-user-id
     shell: sh
 
-  - name: Post to a Slack user
-    id: slack
-    uses: slackapi/slack-github-action@v1.26.0
+  - uses: slackapi/slack-github-action@v1.26.0
     if: steps.get-employee-js.outputs.slack-user-id == steps.get-employee-docker.outputs.slack-user-id
     with:
       channel-id: '${{ steps.get-employee-js.outputs.slack-user-id }}'
