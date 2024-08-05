@@ -18,7 +18,7 @@ async function run() {
     );
     core.setOutput("slack-user-id", slackUserId);
   } catch (error) {
-    core.setFailed(error.message);
+    core.setFailed(error);
   }
 }
 
@@ -44,13 +44,16 @@ async function lookupSlackUserByGitHubUsername(
       );
     }
 
+    core.debug(`Found email for GitHub user: ${email}`);
+
     return email;
   });
 
-  core.debug(`Found email for GitHub user: ${email}`);
-
   return await core.group("Fetch Slack user info", async () => {
     const web = new WebClient(slackToken);
+
+    core.debug(`Looking up Slack user by email: ${email}`);
+
     const { user: slackUser } = await web.users.lookupByEmail({ email: email });
 
     if (!slackUser) {
