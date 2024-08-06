@@ -4,4 +4,5 @@
 ls -al | awk '{print "::debug::" $0}'
 
 # Run the original entrypoint
-dotnet DotNetDockerAction.dll
+#dotnet DotNetDockerAction.dll
+echo "Test custom entrypoint"
