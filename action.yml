@@ -19,8 +19,7 @@ runs:
   using: composite
   steps:
 
-  - id: 'get-employee-js'
-    uses: './get-employee-js-action'
+  - uses: './get-employee-js-action'
     with:
       github-username: ${{ inputs.github-username }}
       github-token: ${{ inputs.github-token }}
