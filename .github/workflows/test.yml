@@ -1,0 +1,44 @@
+name: Test Actions
+
+on:
+  pull_request:
+    branches:
+      - main
+      - m4/demo
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  test-get-employee-js-action:
+    name: Test Get Employee Action (JavaScript)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: get-employee-js-action/.nvmrc
+          cache-dependency-path: get-employee-js-action
+          cache: npm
+
+      - name: Install Dependencies
+        run: npm ci
+        working-directory: get-employee-js-action
+
+      - name: Test Get Employee (JavaScript) Action
+        id: test-employee-js-action
+        uses: ./get-employee-js-action
+        with:
+          github-username: ${{ github.actor }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          slack-token: ${{ secrets.SLACK_TOKEN }}
+
+      - name: Print Slack User ID
+        run: echo "${{ steps.test-employee-js-action.outputs.slack-user-id }}"
