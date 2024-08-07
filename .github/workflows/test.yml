@@ -83,7 +83,6 @@ jobs:
       - name: Test Slack Message (Composite) Action
         id: test-send-action
         uses: ./
-        secrets: inherit
         with:
           github-username: ${{ github.actor }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
