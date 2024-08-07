@@ -15,19 +15,26 @@ inputs:
     description: 'The organizational Slack access token to send chat messages'
     required: true
 
+outputs:
+  time:
+    description: 'The time the message was sent'
+    value: ${{ steps.slack-send.outputs.ts }}
+
 runs:
   using: composite
   steps:
 
-  - uses: './get-employee-js-action'
+  - id: 'get-employee-js'
+    uses: './get-employee-js-action'
     with:
       github-username: ${{ inputs.github-username }}
       github-token: ${{ inputs.github-token }}
-      slack-token: ${{ inputs.slack-ttoken }}
+      slack-token: ${{ inputs.slack-token }}
 
-  - name: slack-send
-    uses: slackapi/slack-github-action
+  - id: slack-send
+    uses: slackapi/slack-github-action@v1.26
     with:
       channel-id: ${{ steps.get-employee-js.outputs.slack-user-id }}
       slack-message: "GitHub build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
-      slack-token: ${{ inputs.slack-bot-token }}
+    env:
+      SLACK_BOT_TOKEN: ${{ inputs.slack-bot-token }}
