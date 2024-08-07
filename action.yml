@@ -23,7 +23,7 @@ runs:
     with:
       github-username: ${{ inputs.github-username }}
       github-token: ${{ inputs.github-token }}
-      slack-token: ${{ inputs.slack-ttoken }}
+      slack-token: ${{ inputs.slack-token }}
 
   - name: slack-send
     uses: slackapi/slack-github-action@v1.26.0
