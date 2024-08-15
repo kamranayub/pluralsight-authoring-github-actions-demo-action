@@ -1,5 +1,5 @@
-name: 'Send Status Notification to Slack (Composite)'
-description: "Sends the status of the GitHub Action to the user via Slack"
+name: 'Send Build Status Notification to Slack User (DEMO)'
+description: "Sends the status of the GitHub Action to the GitHub user who triggered the workflow via Slack. This is a demo action, DO NOT USE."
 
 inputs:
   github-token:
@@ -20,6 +20,10 @@ outputs:
     description: 'The time the message was sent'
     value: ${{ steps.slack-send.outputs.ts }}
 
+branding:
+  color: red
+  icon: send
+  
 runs:
   using: composite
   steps:
@@ -56,4 +60,3 @@ runs:
       slack-message: "GitHub build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
     env:
       SLACK_BOT_TOKEN: ${{ inputs.slack-bot-token }}
-            
