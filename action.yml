@@ -1,5 +1,5 @@
 name: 'Send Build Status Notification to Slack User (DEMO)'
-description: "Sends the status of the GitHub Action to the GitHub user who triggered the workflow via Slack. This is a demo action, DO NOT USE."
+description: "Reports the build status to the GitHub user who triggered the workflow via Slack. This is a demo action, DO NOT USE."
 
 inputs:
   github-token:
