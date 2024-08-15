@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - main
+      - m5/demo
   push:
     branches:
       - main
