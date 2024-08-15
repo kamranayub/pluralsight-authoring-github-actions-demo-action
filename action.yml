@@ -26,7 +26,7 @@ runs:
 
   - name: Set reference to current action version
     id: set-action-version
-    run: echo "ref=$(ACTION_REF)" >> $GITHUB_OUTPUT
+    run: echo "ref=$ACTION_REF" >> $GITHUB_OUTPUT
     shell: bash
     env:
       ACTION_REF: ${{ github.action_ref }}
