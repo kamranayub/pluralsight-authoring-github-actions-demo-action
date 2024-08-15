@@ -24,8 +24,17 @@ runs:
   using: composite
   steps:
 
+  # See: https://github.com/orgs/community/discussions/67904
+  - name: Workaround for local actions
+    uses: actions/checkout@v4
+    with:
+      repository: kamranayub/pluralsight-authoring-github-actions-demo-action
+      path: .local-action-cache
+      sparse-checkout: |
+        get-employee-js-action
+
   - id: get-employee-js
-    uses: '${{ github.action_path }}/get-employee-js-action'
+    uses: './.local-action-cache/get-employee-js-action'
     with:
       github-username: ${{ inputs.github-username }}
       github-token: ${{ inputs.github-token }}
