@@ -1,9 +1,6 @@
 # Notify Slack User Demo Action (Pluralsight)
 
-<!--
-[![GitHub Super-Linter](https://github.com/actions/hello-world-javascript-action/actions/workflows/linter.yml/badge.svg)](https://github.com/super-linter/super-linter)
-![CI](https://github.com/actions/hello-world-javascript-action/actions/workflows/ci.yml/badge.svg)
--->
+![Build and Test](https://github.com/kamranayub/pluralsight-authoring-github-actions-demo-action/actions/workflows/test.yml/badge.svg)
 
 This action sends a Slack message to a GitHub user by looking them up in your Slack workspace by their public email address. This is a demo action for the [Authoring and Maintaining GitHub Actions Pluralsight course](https://github.com/kamranayub/pluralsight-course-authoring-maintaining-github-actions).
 
