@@ -24,12 +24,19 @@ runs:
   using: composite
   steps:
 
+  - name: Set reference to current action version
+    id: set-action-version
+    run: echo "ref=$(ACTION_REF)" >> $GITHUB_OUTPUT
+    shell: bash
+    env:
+      ACTION_REF: ${{ github.action_ref }}
+
   # See: https://github.com/orgs/community/discussions/67904
-  - name: Workaround for local actions
+  - name: Setup workaround for local actions
     uses: actions/checkout@v4
     with:
       repository: kamranayub/pluralsight-authoring-github-actions-demo-action
-      ref: latest
+      ref: ${{ steps.set-action-version.outputs.ref }}
       token: ${{ inputs.github-token }}
       path: .local-action-cache
       sparse-checkout: |
