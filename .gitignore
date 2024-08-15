@@ -1,3 +1,6 @@
+# GitHub runner action workflow command files
+GITHUB_OUTPUT
+
 # Logs
 logs
 *.log
