@@ -24,8 +24,26 @@ runs:
   using: composite
   steps:
 
+  - name: Set reference to current action version
+    id: set-action-version
+    run: echo "ref=$ACTION_REF" >> $GITHUB_OUTPUT
+    shell: bash
+    env:
+      ACTION_REF: ${{ github.action_ref }}
+
+  # See: https://github.com/orgs/community/discussions/67904
+  - name: Setup workaround for local actions
+    uses: actions/checkout@v4
+    with:
+      repository: kamranayub/pluralsight-authoring-github-actions-demo-action
+      ref: ${{ steps.set-action-version.outputs.ref }}
+      token: ${{ inputs.github-token }}
+      path: .local-action-cache
+      sparse-checkout: |
+        get-employee-js-action
+
   - id: get-employee-js
-    uses: './get-employee-js-action'
+    uses: './.local-action-cache/get-employee-js-action'
     with:
       github-username: ${{ inputs.github-username }}
       github-token: ${{ inputs.github-token }}
